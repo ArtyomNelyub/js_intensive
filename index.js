@@ -1,24 +1,26 @@
-function changeNumberSystem() {
-  let number = +prompt('Введите число: ');
-  let numberSystem = +prompt('Введите систему счисления: ');
+function calculation() {
+  function checkNumber(numb) {
+    if (!Number.isFinite(numb)) {
+      console.log('Некорректный ввод');
+      return false;
+    }
 
-  if (
-    !(
-      Number.isFinite(number) &&
-      Number.isFinite(numberSystem) &&
-      numberSystem >= 2 &&
-      numberSystem <= 36
-    )
-  ) {
-    console.log('Некорректный ввод');
+    return true;
+  }
+
+  let firstNumber = +prompt('Введите первое число: ');
+  if (!checkNumber(firstNumber)) {
+    return;
+  }
+
+  let secondNumber = +prompt('Введите второе число: ');
+  if (!checkNumber(secondNumber)) {
     return;
   }
 
   console.log(
-    `${number} в системе счисления ${numberSystem}: ${number.toString(
-      numberSystem
-    )}`
+    `Ответ: ${firstNumber + secondNumber}, ${firstNumber / secondNumber}`
   );
 }
 
-changeNumberSystem();
+calculation();
