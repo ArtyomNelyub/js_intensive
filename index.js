@@ -24,3 +24,31 @@ function calculation() {
 }
 
 calculation();
+
+class StackElement {
+  constructor(value, prev){
+    this.value = value;
+    this.prev = prev
+  }
+}
+
+class Stack {
+  constructor() {
+    this.last = null
+  }
+
+  push(data) {
+    this.last = new StackElement(data, this.last)
+  }
+  
+  pop() {
+    let result;
+    if (this.last !== null) {
+      result = this.last.data;
+      this.last =this.last.prev;
+    }
+    return result
+  }
+
+  // По нотации big O - O(n)
+}
