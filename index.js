@@ -23,6 +23,27 @@ function calculation() {
   );
 }
 
+function selectFromInterval(array, firstInterval, secondInterval) {
+  if (!Number.isFinite(firstInterval) || !Number.isFinite(secondInterval)) {
+    throw new Error('Интервалы должны быть числами');
+  }
+
+  if (!Array.isArray(array)) {
+    throw new Error('Первый аргумент должен быть массив');
+  }
+
+  array.forEach((item) => {
+    if (!Number.isFinite(item)) {
+      throw new Error('Входной массив должен быть только из чисел');
+    }
+  });
+
+  let min = Math.min(firstInterval, secondInterval);
+  let max = Math.max(firstInterval, secondInterval);
+
+  return array.filter((item) => item >= min && item <= max);
+ }
+
 function makeObjectDeepCopy(entity) {
   let result;
 
