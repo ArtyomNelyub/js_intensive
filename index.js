@@ -24,28 +24,28 @@ function calculation() {
 }
 
 class StackElement {
-  constructor(value, prev){
+  constructor(value, prev) {
     this.value = value;
-    this.prev = prev
+    this.prev = prev;
   }
 }
 
 class Stack {
   constructor() {
-    this.last = null
+    this.last = null;
   }
 
   push(data) {
-    this.last = new StackElement(data, this.last)
+    this.last = new StackElement(data, this.last);
   }
-  
+
   pop() {
     let result;
     if (this.last !== null) {
       result = this.last.data;
-      this.last =this.last.prev;
+      this.last = this.last.prev;
     }
-    return result
+    return result;
   }
 
   // По нотации big O - O(1)
@@ -70,7 +70,7 @@ function selectFromInterval(array, firstInterval, secondInterval) {
   let max = Math.max(firstInterval, secondInterval);
 
   return array.filter((item) => item >= min && item <= max);
- }
+}
 
 function makeObjectDeepCopy(entity) {
   let result;
@@ -115,3 +115,15 @@ function makeObjectDeepCopy(entity) {
 
   return result;
 }
+
+Array.prototype.myFilter = function (callback) {
+  let result = [];
+
+  for (let i = 0; i < this.length; i++) {
+    if (callback.apply(this, [this[i], i, this])) {
+      result.push(this[i]);
+    }
+  }
+
+  return result;
+};
