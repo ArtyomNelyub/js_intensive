@@ -24,28 +24,28 @@ function calculation() {
 }
 
 class StackElement {
-  constructor(value, prev){
+  constructor(value, prev) {
     this.value = value;
-    this.prev = prev
+    this.prev = prev;
   }
 }
 
 class Stack {
   constructor() {
-    this.last = null
+    this.last = null;
   }
 
   push(data) {
-    this.last = new StackElement(data, this.last)
+    this.last = new StackElement(data, this.last);
   }
-  
+
   pop() {
     let result;
     if (this.last !== null) {
       result = this.last.data;
-      this.last =this.last.prev;
+      this.last = this.last.prev;
     }
-    return result
+    return result;
   }
 
   // По нотации big O - O(1)
@@ -70,7 +70,7 @@ function selectFromInterval(array, firstInterval, secondInterval) {
   let max = Math.max(firstInterval, secondInterval);
 
   return array.filter((item) => item >= min && item <= max);
- }
+}
 
 function makeObjectDeepCopy(entity) {
   let result;
@@ -115,3 +115,39 @@ function makeObjectDeepCopy(entity) {
 
   return result;
 }
+
+let myIterable = {
+  from: 5,
+  to: 5,
+  [Symbol.iterator]: function () {
+    let start = this.from;
+    let end = this.to;
+
+    if (end < start) {
+      throw new Error('поле from должен быть не больше поля to');
+    }
+
+    if (!this.from || !this.to) {
+      throw new Error('поля from и to должны быть заданы в объекте');
+    }
+    
+    if (!Number.isFinite(start) || !Number.isFinite(end)) {
+      throw new Error('поля from и to должны быть числами');
+    }
+
+    return {
+      next() {
+        if (start <= end) {
+          return {
+            done: false,
+            value: start++,
+          };
+        } else {
+          return {
+            done: true,
+          };
+        }
+      },
+    };
+  },
+};
