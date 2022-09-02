@@ -116,6 +116,19 @@ function makeObjectDeepCopy(entity) {
   return result;
 }
 
+
+Array.prototype.myFilter = function (callback) {
+  let result = [];
+
+  for (let i = 0; i < this.length; i++) {
+    if (callback.apply(this, [this[i], i, this])) {
+      result.push(this[i]);
+    }
+  }
+
+  return result;
+};
+
 let myIterable = {
   from: 5,
   to: 5,
@@ -151,3 +164,4 @@ let myIterable = {
     };
   },
 };
+
