@@ -116,6 +116,7 @@ function makeObjectDeepCopy(entity) {
   return result;
 }
 
+
 Array.prototype.myFilter = function (callback) {
   let result = [];
 
@@ -127,3 +128,40 @@ Array.prototype.myFilter = function (callback) {
 
   return result;
 };
+
+let myIterable = {
+  from: 5,
+  to: 5,
+  [Symbol.iterator]: function () {
+    let start = this.from;
+    let end = this.to;
+
+    if (end < start) {
+      throw new Error('поле from должен быть не больше поля to');
+    }
+
+    if (!this.from || !this.to) {
+      throw new Error('поля from и to должны быть заданы в объекте');
+    }
+    
+    if (!Number.isFinite(start) || !Number.isFinite(end)) {
+      throw new Error('поля from и to должны быть числами');
+    }
+
+    return {
+      next() {
+        if (start <= end) {
+          return {
+            done: false,
+            value: start++,
+          };
+        } else {
+          return {
+            done: true,
+          };
+        }
+      },
+    };
+  },
+};
+
