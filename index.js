@@ -116,7 +116,6 @@ function makeObjectDeepCopy(entity) {
   return result;
 }
 
-
 Array.prototype.myFilter = function (callback) {
   let result = [];
 
@@ -143,7 +142,7 @@ let myIterable = {
     if (!this.from || !this.to) {
       throw new Error('поля from и to должны быть заданы в объекте');
     }
-    
+
     if (!Number.isFinite(start) || !Number.isFinite(end)) {
       throw new Error('поля from и to должны быть числами');
     }
@@ -165,3 +164,20 @@ let myIterable = {
   },
 };
 
+function createDebounceFunction(cb, delay) {
+  let flag = false;
+  let timerId;
+
+  return () => {
+    if (flag) {
+      clearTimeout(timerId);
+    } else {
+      flag = true;
+    }
+
+    timerId = setTimeout(() => {
+      cb();
+      flag = false;
+    }, delay);
+  };
+}
