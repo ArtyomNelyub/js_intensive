@@ -181,3 +181,53 @@ function createDebounceFunction(cb, delay) {
     }, delay);
   };
 }
+
+class Calculator {
+  constructor(x, y) {
+    if (!Number.isFinite(x) || !Number.isFinite(y)) {
+      throw new Error(
+        'Упс, кажется вы ввели не число или не ввели его вовсе, это так не работает...'
+      );
+    }
+    this.x = x;
+    this.y = y;
+  }
+
+  setX(value) {
+    if (!Number.isFinite(value)) {
+      throw new Error(
+        'Метод должен принимать аргумент и он должен быть числом'
+      );
+    }
+    this.x = value;
+  }
+
+  setY(value) {
+    if (!Number.isFinite(value)) {
+      throw new Error(
+        'Метод должен принимать аргумент и он должен быть числом'
+      );
+    }
+    this.y = value;
+  }
+
+  logSum() {
+    console.log(`Сумма ${this.x} и ${this.y}`, this.x + this.y);
+  }
+
+  logMul() {
+    console.log(`Произведение ${this.x} и ${this.y}`, this.x * this.y);
+  }
+
+  logSub() {
+    console.log(`Разность ${this.x} и ${this.y}`, this.x - this.y);
+  }
+
+  logDiv() {
+    if (this.y === 0) {
+      throw new Error('Делить на ноль не получилось');
+    }
+    console.log(`Частное ${this.x} и ${this.y}`, this.x / this.y);
+  }
+}
+
